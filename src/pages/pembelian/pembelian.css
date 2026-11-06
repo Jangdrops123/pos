@@ -1,0 +1,1160 @@
+/* Gaya khusus halaman Pembelian/Inbound (di samping styles.css + crud.css). */
+
+/* Token Switcher modul (topbar + .token-grup) memakai gaya global crud.css. */
+
+/* Kanan header: switcher metode + token utama sejajar (switcher di kiri). */
+.tokenbar-kanan {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+.tokenbar-kanan .metode-pilih {
+  margin-top: 0;
+}
+
+/* Pemilih metode input di bagian atas halaman (segmented control). */
+.metode-pilih {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.875rem;
+  padding: 0.25rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 62.4375rem;
+  max-width: 100%;
+}
+
+/* Token ikon: non-aktif hanya ikon (label menciut), aktif melebar + label. */
+.metode-pilih__tombol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--teks-redup);
+  padding: 0.375rem 0.625rem;
+  border-radius: 62.4375rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.metode-pilih__tombol:hover {
+  border-color: var(--primer);
+  color: var(--primer-teks);
+}
+.metode-pilih__tombol > svg {
+  flex: none;
+}
+.metode-pilih__label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 0.2s ease-in-out, opacity 0.15s ease;
+}
+
+.metode-pilih__tombol--aktif {
+  background: var(--primer);
+  border-color: var(--primer);
+  color: var(--accent-contrast);
+  box-shadow: var(--bayangan);
+}
+.metode-pilih__tombol--aktif .metode-pilih__label {
+  max-width: 12rem;
+  opacity: 1;
+}
+.form-beli {
+  margin-top: 0.5rem;
+}
+
+/* Tabel item form: select/input mengisi sel. */
+.tabel--item-beli select,
+.tabel--item-beli input {
+  width: 100%;
+  min-width: 4rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  background: var(--surface);
+  color: var(--teks);
+}
+.tabel--item-beli select:focus,
+.tabel--item-beli input:focus {
+  outline: 2px solid var(--primer-lembut);
+  border-color: var(--primer);
+}
+
+.input-angka {
+  text-align: right;
+}
+
+/* --- Grid transaksi: tabel kiri + ringkasan kanan ---------------------------
+   Mobile (<768px): 1 kolom tumpuk — TAMPILAN TIDAK BERUBAH (pembungkus
+   display:contents sehingga anak-anak tampil persis seperti sebelumnya).
+   Tablet (md, >=768px): 8/4; desktop (lg, >=1280px): 9/3. Kartu ringkasan
+   sticky di kolom kanan. */
+.transaksi-grid {
+  display: block;
+}
+.transaksi-utama {
+  display: contents;
+}
+@media (min-width: 768px) {
+  .transaksi-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .transaksi-utama {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .transaksi-grid > .transaksi-aksi {
+    grid-column: 1;
+  }
+  .transaksi-ringkas {
+    position: sticky;
+    top: 0.75rem;
+    min-width: 0;
+  }
+  .transaksi-ringkas .ringkas-beli {
+    width: 100%;
+    margin: 0;
+  }
+}
+@media (min-width: 1280px) {
+  .transaksi-grid {
+    grid-template-columns: minmax(0, 9fr) minmax(0, 3fr);
+  }
+}
+
+/* Ringkasan total di bawah tabel item (AH1b): kartu terang — latar
+   --surface, border --border, label --text-muted, nilai --text; angka rata
+   kanan + tabular-nums agar selalu terbaca di tema Siang & Malam. */
+.ringkas-beli {
+  margin: 0.75rem 0 0 auto;
+  width: min(22.5rem, 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.625rem 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ringkas-beli__baris {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.1875rem 0;
+  font-size: 0.8125rem;
+  color: var(--teks-redup);
+}
+.ringkas-beli__baris strong {
+  color: var(--text);
+  font-weight: 600;
+  text-align: right;
+}
+
+.ringkas-beli__total {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  margin-top: 0.375rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.ringkas-beli__total strong {
+  color: var(--accent-text);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* --- Metode Chatbot ------------------------------------------------------ */
+.chat-panel {
+  margin-top: 0.5rem;
+}
+/* Kotak percakapan (dipakai juga di modal Lihat untuk riwayat). */
+.chat-kotak {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+  padding: 0.75rem;
+  max-height: 21.25rem;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.chat-kotak--riwayat {
+  margin-top: 0;
+  max-height: 18.75rem;
+}
+.chat-kosong {
+  text-align: center;
+  padding: 1.125rem 0.75rem;
+}
+
+.chat-kosong p {
+  margin: 0.375rem auto 0;
+  max-width: 40rem;
+}
+.chat-pesan {
+  display: flex;
+}
+
+.chat-pesan--user {
+  justify-content: flex-end;
+}
+.chat-pesan__isi {
+  max-width: 82%;
+  white-space: pre-wrap;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.chat-pesan--user .chat-pesan__isi {
+  background: var(--primer);
+  border-color: var(--primer);
+  color: var(--accent-contrast);
+  border-bottom-right-radius: 4px;
+}
+.chat-pesan--bot .chat-pesan__isi {
+  border-bottom-left-radius: 4px;
+}
+
+.chat-riwayat-blok {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+}
+.chat-riwayat-blok:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.chat-waktu {
+  text-align: right;
+}
+/* Kotak chat kosong disembunyikan (petunjuk ada di placeholder textarea). */
+.chat-kotak:empty {
+  display: none;
+}
+/* Sel tombol Aturan & Contoh: sejajar bawah dengan input di sel sebelahnya. */
+.bidang--aturan {
+  justify-content: flex-end;
+}
+.tombol-aturan {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--teks);
+  padding: 0.1875rem 0.625rem;
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tombol-aturan:hover {
+  border-color: var(--primer);
+  color: var(--primer-teks);
+}
+/* Isi popup Aturan & Contoh. */
+.aturan-chat {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+  font-size: 0.8125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.contoh-chat {
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  background: var(--surface);
+  padding: 0.625rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.contoh-chat pre {
+  margin: 0 0 0.5rem;
+  white-space: pre-wrap;
+  font-size: 0.8125rem;
+}
+/* Kotak input + tombol kirim. */
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+}
+
+.chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5625rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font: inherit;
+}
+.chat-input input:focus {
+  outline: 2px solid var(--primer-lembut);
+  border-color: var(--primer);
+}
+
+/* Keterangan hasil pemasok dari chat. */
+.chat-pemasok {
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+}
+.chat-pemasok--ok {
+  background: var(--success-soft);
+  color: var(--success-text);
+}
+
+.chat-pemasok--waspadai {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+/* --- Chatbot gaya baris (satu baris per barang) ------------------------- */
+.chat-input--baris {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.chat-input--baris textarea {
+  width: 100%;
+  min-height: 8.75rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font: inherit;
+  font-size: 0.8438rem;
+  line-height: 1.6;
+  resize: vertical;
+  white-space: pre-wrap;
+  background: var(--surface);
+}
+.chat-input--baris textarea:focus {
+  outline: 2px solid var(--primer-lembut);
+  border-color: var(--primer);
+}
+
+.chat-input__bantuan {
+  margin-top: 0.25rem;
+}
+.chat-input__aksi {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Pratinjau terstruktur: pemasok, tanggal, total, cek "Total = …". */
+.chat-pratinjau {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 0.8125rem;
+}
+
+.chat-pratinjau__baris {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.chat-pratinjau__baris > span {
+  min-width: 9.375rem;
+  color: var(--teks-redup);
+}
+
+.chat-pratinjau__cek {
+  margin-top: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.chat-pratinjau__cek--ok {
+  background: var(--success-soft);
+  color: var(--success-text);
+}
+
+.chat-pratinjau__cek--salah {
+  background: var(--danger-soft);
+  color: var(--danger-text);
+}
+
+.chat-konfirmasi {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.7813rem;
+}
+
+.chat-pratinjau__pemasok {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.5rem;
+  background: var(--warning-soft);
+  color: var(--warning-text);
+}
+
+.chat-pratinjau__pemasok select {
+  font: inherit;
+  font-size: 0.7813rem;
+}
+/* Kepala kelompok satu baris teks (di atas baris per size). */
+tr.chat-grup > td {
+  background: var(--bar-bg);
+  border-top: 2px solid var(--border);
+}
+
+tr.chat-grup--waspadai > td {
+  background: var(--warning-soft);
+}
+.chat-grup__kepala {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chat-grup__qty {
+  font-size: 0.7813rem;
+  color: var(--teks-redup);
+}
+.chat-grup__rincian {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.chip-size {
+  border: 1px solid var(--border);
+  border-radius: 62.4375rem;
+  background: var(--surface);
+  padding: 0.0625rem 0.5rem;
+  font-size: 0.7188rem;
+  white-space: nowrap;
+}
+.chat-grup__alasan {
+  margin-top: 0.25rem;
+  font-size: 0.7813rem;
+  color: var(--warning);
+}
+
+/* Baris yang tidak terbaca — merah (bukan kuning). */
+.baris-galat > td {
+  background: var(--danger-soft);
+}
+.chat-buat-baru {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.375rem;
+}
+
+.tautan-kecil {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--primer);
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* Baris tabel draft chat yang perlu diperiksa + catatan kuningnya. */
+.baris-waspadai > td {
+  background: var(--warning-soft);
+}
+
+.baris-catatan > td {
+  padding-top: 0;
+  background: var(--warning-soft);
+  color: var(--warning);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+/* Select saran (penanda kuning untuk bagian ambigu/tidak cocok). */
+.saran-pilih {
+  display: block;
+  width: 100%;
+  margin-top: 0.3125rem;
+  padding: 0.3125rem 0.375rem;
+  border: 1px solid var(--warning-fill);
+  border-radius: 0.375rem;
+  background: var(--warning-soft);
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--teks);
+}
+
+.saran-pilih:focus {
+  outline: 2px solid var(--warning-soft);
+  border-color: var(--waspada);
+}
+/* Placeholder metode yang menyusul (Scan). */
+.metode-kerangka {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  padding: 1rem 1.125rem;
+  margin-top: 0.875rem;
+}
+
+.metode-kerangka .bagian-judul {
+  margin-top: 0;
+}
+/* Mode Chatbot: judul seksi tepat di atas tabel item — samakan napas 14px. */
+.metode-kerangka .bagian-judul:has(+ .tabel-bungkus) {
+  margin-bottom: 0.875rem;
+}
+
+/* --- Metode Scan Barcode --- */
+.scan-baris-input {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 0.875rem;
+}
+
+.scan-input {
+  flex: 1 1 320px;
+  padding: 0.625rem 0.875rem;
+  border: 1.5px solid var(--primer);
+  border-radius: 0.5rem;
+  font: inherit;
+  font-size: 0.875rem;
+  background: var(--surface);
+  color: var(--teks);
+}
+.scan-input:focus {
+  outline: 2px solid var(--primer-lembut);
+}
+
+.scan-aktivitas {
+  list-style: none;
+  margin: 0 0 0.625rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--teks-redup);
+  max-height: 6.75rem;
+  overflow-y: auto;
+}
+.scan-aktivitas li {
+  padding: 0.0938rem 0;
+}
+
+.scan-ringkasan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.scan-box-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border-radius: 62.4375rem;
+  padding: 0.3125rem 0.8125rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--teks);
+}
+
+.scan-box-chip--beda {
+  background: var(--warning-soft);
+  border-color: #fcd34d;
+  color: var(--warning);
+}
+.scan-box-chip--total {
+  background: var(--primer-lembut);
+  border-color: var(--banner-border);
+  color: var(--primer-teks);
+}
+
+.scan-kosong {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.625rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+/* Tabel baris scan pada Pembelian. */
+.tabel--scan td {
+  vertical-align: middle;
+}
+
+.kamera-video {
+  width: min(26.25rem, 100%);
+  border-radius: 0.5rem;
+  background: #000;
+  display: block;
+}
+.dialog-pilihan {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.dialog-pilihan .tombol {
+  text-align: left;
+}
+.scan-box-baris {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.scan-box-baris select {
+  flex: 1;
+  padding: 0.4375rem 0.5625rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  background: var(--surface);
+}
+.scan-box-baris input {
+  width: 5.5rem;
+  padding: 0.4375rem 0.5625rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font: inherit;
+  font-size: 0.8125rem;
+}
+
+/* --- Mode Biasa: kolom cari autocomplete (gaya Kasir Tanpa Foto) --------- */
+.cari-barang {
+  position: relative;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.cari-barang__input {
+  width: 100%;
+  padding: 0.6875rem 0.875rem;
+  border: 1.5px solid var(--primer);
+  border-radius: 0.5rem;
+  font: inherit;
+  font-size: 0.875rem;
+  background: var(--surface);
+}
+
+.cari-barang__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primer-lembut);
+}
+.cari-barang__input:disabled {
+  border-color: var(--border);
+  background: var(--surface-2);
+  cursor: not-allowed;
+}
+
+.cari-barang__hint {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--waspada);
+}
+.cari-barang__status {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--teks-redup);
+}
+
+.cari-barang__dropdown {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  box-shadow: 0 14px 32px rgba(16, 24, 40, 0.14);
+  max-height: 23.75rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.cari-barang__baris {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+
+.cari-barang__baris.terpilih {
+  background: var(--primer-lembut);
+}
+.cari-barang__baris-utama {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.cari-barang__kode {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primer-teks);
+  font-family: ui-monospace, monospace;
+}
+.cari-barang__nama {
+  font-size: 0.875rem;
+}
+
+.cari-barang__meta {
+  font-size: 0.75rem;
+  color: var(--teks-redup);
+}
+.cari-barang__baris mark {
+  background: var(--warning-soft);
+  color: inherit;
+  padding: 0 0.0625rem;
+  border-radius: 0.125rem;
+}
+
+.cari-barang__matriks {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 0.375rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+.cari-barang__matriks:hover {
+  border-color: var(--primer);
+  background: var(--primer-lembut);
+}
+
+.cari-barang__kaki,
+.cari-barang__kosong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-2);
+}
+/* --- Keranjang item mode Biasa ------------------------------------------ */
+.keranjang-kepala {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  margin-top: 0.375rem;
+  /* Jarak napas 14px antara kolom cari dan header tabel item. */
+  margin-bottom: 0.875rem;
+}
+
+.keranjang-ringkas {
+  font-size: 0.8125rem;
+  color: var(--teks-redup);
+  white-space: nowrap;
+  padding-top: 0.75rem;
+}
+/* Kotak item kosong (AH1a): latar --surface-2, border dashed --border,
+   teks --text-muted — tanpa latar navy; tema Malam memakai token yang sama. */
+.keranjang-kosong {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.125rem;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  /* Jarak atas sudah disediakan .keranjang-kepala (14px). */
+  margin: 0;
+}
+
+.tabel--keranjang td {
+  vertical-align: middle;
+}
+/* Qty: hanya input angka (tanpa tombol +/−). Koma desimal dibatasi oleh
+   jenis satuan — lihat bolehDesimal() di PembelianPage. */
+.input-qty {
+  width: 4.625rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Navigasi keyboard mode Biasa (G2) ---------------------------------- */
+/* Fokus selalu terlihat jelas: garis biru tebal + sorot baris aktif. */
+.tabel--item-beli .input-angka:focus,
+.tabel--item-beli select:focus,
+.cari-barang__input:focus {
+  outline: 2px solid var(--primer);
+  outline-offset: 1px;
+  border-color: var(--primer);
+  background: var(--surface);
+}
+.tabel--item-beli tr.baris-aktif > td {
+  background: var(--row-selected-solid);
+}
+
+.tabel--item-beli tr.baris-aktif > td:first-child {
+  box-shadow: inset 3px 0 0 var(--primer);
+}
+/* Baris baru dihapus — bisa diurungkan 5 detik */
+.baris-undo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  /* Di bawah .keranjang-kepala (sudah berjarak 14px): hanya jarak ke tabel. */
+  margin: 0 0 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #fcd34d;
+  background: var(--warning-soft);
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.diskon-kontrol {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.diskon-kontrol input {
+  width: 4.875rem;
+  text-align: right;
+}
+
+.diskon-kontrol select {
+  padding: 0.3125rem 0.375rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  font: inherit;
+  font-size: 0.75rem;
+  background: var(--surface);
+}
+.input-ribuan {
+  min-width: 6.875rem;
+  text-align: right;
+}
+
+/* Baris hasil merge (+1) disorot sebentar. */
+tr.baris-sorot > td {
+  animation: barisSorot 1.4s ease;
+}
+
+@keyframes barisSorot {0%,
+  45% {
+    background: var(--success-soft);
+  }
+  100% {
+    background: transparent;
+  }
+}
+/* Matriks Size × Warna */
+.tabel--matriks th,
+.tabel--matriks td {
+  padding: 0.375rem 0.5rem;
+}
+
+.tabel--matriks input {
+  width: 4.5rem;
+}
+
+/* --- Responsif: tabel item jadi kartu, kolom cari menempel di atas ------- */
+@media (max-width: 760px) {.cari-barang {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .tabel--keranjang thead {
+    display: none;
+  }
+.tabel--keranjang tbody tr {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 0.625rem;
+    margin-bottom: 0.625rem;
+    padding: 0.5rem 0.625rem;
+    background: var(--surface);
+  }
+
+  .tabel--keranjang td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.625rem;
+    border: 0;
+    padding: 0.1875rem 0;
+    text-align: left;
+  }
+.tabel--keranjang td::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    color: var(--teks-redup);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .keranjang-ringkas {
+    padding-top: 0;
+  }
+}
+
+/* ===== AF4/AF5 — pratinjau per profil size ================================ */
+.chat-perhatian {
+  border: 1px solid var(--warning-fill);
+  background: var(--warning-soft);
+  color: var(--warning-text);
+  border-radius: 0.625rem;
+  padding: 0.625rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.chat-perhatian ul {
+  margin: 0.375rem 0;
+  padding-left: 1.125rem;
+}
+.chat-perhatian a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.chat-blok-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+.chat-blok {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--surface);
+}
+
+.chat-blok__kepala {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.chat-blok-tabel {
+  width: 100%;
+}
+
+.chat-blok-tabel select {
+  font: inherit;
+  padding: 0.1875rem 0.3125rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--teks);
+  max-width: 8.125rem;
+}
+.chat-profil-pilih {
+  max-width: 10rem;
+}
+
+.chat-pesan-baris > td {
+  background: var(--warning-soft);
+}
+.chat-koreksi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.chat-pilih-profil {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+.chat-total-blok {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem;
+  border-top: 2px solid var(--border);
+  margin-bottom: 0.875rem;
+}
+
+@media (max-width: 767.98px) {.chat-blok-tabel {
+    min-width: 40rem;
+  }
+
+  /* Aturan kartu generik (.tabel:has(…) di crud.css) tidak berlaku di sini:
+     pratinjau per profil = tabel size per kolom → gulir mendatar lebih jelas
+     daripada kartu tanpa label. Kembalikan tampilan tabel bawaan. */
+  .tabel-bungkus .chat-blok-tabel.tabel,
+  .tabel-bungkus .chat-blok-tabel.tabel thead,
+  .tabel-bungkus .chat-blok-tabel.tabel tbody,
+  .tabel-bungkus .chat-blok-tabel.tabel tbody tr {
+    display: revert;
+  }
+.tabel-bungkus .chat-blok-tabel.tabel tbody td {
+    display: table-cell;
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: inherit;
+  }
+
+  .tabel-bungkus .chat-blok-tabel.tabel tbody td::before {
+    content: none;
+  }
+}
+
+/* R2 — tautan nomor faktur di baris riwayat: melompat ke Dokumen bawah. */
+.tautan-faktur {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primer-teks, #7dd3fc);
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tautan-faktur:hover {
+  color: var(--primer, #2563eb);
+}
+
+/* --- FIT-LOCK formulir transaksi (tanpa scroll luar) -----------------------
+   Kartu kolom flex setinggi viewport; kepala/token + meta + cari tetap
+   (shrink-0); hanya tabel item yang menggulir di dalam (desktop).
+   Ponsel: seluruh area grid jadi satu scroller internal (header tetap). */
+.kartu--transaksi-fit {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.kartu--transaksi-fit > .tokenbar {
+  flex: 0 0 auto;
+}
+
+.kartu--transaksi-fit .form-beli,
+.kartu--transaksi-fit .scan-panel,
+.kartu--transaksi-fit .chat-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.kartu--transaksi-fit .form-beli > *,
+.kartu--transaksi-fit .scan-panel > *,
+.kartu--transaksi-fit .chat-panel > * {
+  flex: 0 0 auto;
+}
+
+.kartu--transaksi-fit .transaksi-grid,
+.kartu--transaksi-fit .chat-kotak {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.kartu--transaksi-fit .chat-kotak {
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.kartu--transaksi-fit .scan-aktivitas {
+  max-height: 6rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 767.98px) {
+  .kartu--transaksi-fit .transaksi-grid {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (min-width: 768px) {
+  .kartu--transaksi-fit .transaksi-grid {
+    align-items: stretch;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+  }
+  .kartu--transaksi-fit .transaksi-utama {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .kartu--transaksi-fit .transaksi-utama > * {
+    flex: 0 0 auto;
+  }
+  .kartu--transaksi-fit .transaksi-utama > .tabel-bungkus {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+  .kartu--transaksi-fit .transaksi-ringkas {
+    position: static;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}

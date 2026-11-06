@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.env
+.env.*
+backups
+.cloud-attachments
+.freebuff
+.preview-pid
+.pratinjau-http.cjs
+# Database SQLite lama jangan ikut masuk ke image
+data/*.db
+data/*.db-*

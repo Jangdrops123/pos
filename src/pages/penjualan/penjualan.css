@@ -1,0 +1,122 @@
+/* Halaman Penjualan (/penjualan, /penjualan/retur, /penjualan/piutang) —
+   di samping crud.css (gaya tabel, kartu, tombol global). */
+
+/* Z1 — ribon tab "Riwayat | Retur | Piutang" DIHAPUS: ketiganya kini rute
+   mandiri dari sidebar (/penjualan, /penjualan/retur, /penjualan/piutang). */
+
+/* Token Switcher modul (topbar + .token-grup) memakai gaya global crud.css. */
+
+/* Keadaan kosong (M3): tombol POS di tengah + teks petunjuk. */
+.penjualan-kosong {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 2.875rem 1rem;
+  text-align: center;
+  color: var(--teks-redup, #64748b);
+}
+
+.penjualan-kosong p {
+  font-size: 0.9375rem;
+}
+/* ------------------------- Split tombol POS (M3) ------------------------- */
+.pos-split {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.pos-split--tengah {
+  justify-content: center;
+}
+.pos-split__utama {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.pos-split__panah {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+.pos-split__menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 30;
+  min-width: 11.875rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 0.625rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+  overflow: hidden;
+}
+
+.pos-split__menu button {
+  appearance: none;
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 0.5625rem 0.75rem;
+  font-size: 0.8438rem;
+  color: var(--teks, #0f172a);
+  cursor: pointer;
+}
+.pos-split__menu button:hover,
+.pos-split__menu button:focus-visible {
+  background: var(--surface-2);
+  outline: none;
+}
+
+/* --------------------------- Dialog "Lihat" ----------------------------- */
+.penjualan-detail__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+.penjualan-detail__info div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.penjualan-detail__info span {
+  font-size: 0.75rem;
+  color: var(--teks-redup, #64748b);
+}
+.penjualan-detail__sub {
+  margin: 1.125rem 0 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Pembeda visual Riwayat vs Dokumen pindah ke crud.css (dipakai bersama
+   Penjualan & Pembelian). */
+
+/* R2 — tautan nomor faktur di baris riwayat: melompat ke Dokumen bawah. */
+.tautan-faktur {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primer-teks, #7dd3fc);
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tautan-faktur:hover {
+  color: var(--primer, #2563eb);
+}
